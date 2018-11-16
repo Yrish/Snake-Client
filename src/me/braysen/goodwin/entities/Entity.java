@@ -1,7 +1,8 @@
 package me.braysen.goodwin.entities;
 
-public abstract class Entity {
+public abstract class Entity implements Comparable {
     protected int x, y;
+    protected String uuid;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -22,5 +23,12 @@ public abstract class Entity {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int compareTo(Object other) {
+        if (!(other instanceof Entity)) {
+            return -1;
+        }
+        return this.uuid.compareTo(((Entity) other).uuid);
     }
 }
