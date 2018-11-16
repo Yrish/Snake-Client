@@ -1,4 +1,4 @@
-package me.braysen.goodwin.Entities;
+package me.braysen.goodwin.entities;
 
 public class Snake extends Entity {
 
