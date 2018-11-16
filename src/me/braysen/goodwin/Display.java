@@ -38,4 +38,12 @@ public class Display {
         frame.add(canvas);
         frame.pack();
     }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
 }
