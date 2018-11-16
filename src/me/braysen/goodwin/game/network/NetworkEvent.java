@@ -1,4 +1,4 @@
-package me.braysen.goodwin.game.event;
+package me.braysen.goodwin.game.network;
 
 import me.braysen.goodwin.entities.Food;
 import me.braysen.goodwin.entities.Snake;
