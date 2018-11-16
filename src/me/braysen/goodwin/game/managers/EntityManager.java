@@ -8,6 +8,6 @@ public class EntityManager {
     protected ArrayList<Entity> entities = new ArrayList<>();
 
     public EntityManager() {
-        
+
     }
 }
