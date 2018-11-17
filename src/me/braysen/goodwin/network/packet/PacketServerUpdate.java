@@ -17,7 +17,7 @@ public class PacketServerUpdate extends Packet {
             int sizeOfCurrentSnakeTrail = dataInputStream.readInt();
 
             for (int j = 0; j < sizeOfCurrentSnakeTrail; j++) {
-
+                System.out.println("test");
             }
         }
     }
