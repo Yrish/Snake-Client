@@ -1,7 +1,8 @@
 package me.braysen.goodwin;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Canvas;
+import java.awt.Dimension;
 
 public class Display {
 
