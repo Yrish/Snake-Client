@@ -4,7 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public abstract class Packet implements Serializable {
+public abstract class Packet {
 
     private PacketName packetName;
 
@@ -21,11 +21,13 @@ public abstract class Packet implements Serializable {
     }
 
     public enum PacketName implements Serializable {
+
         FOOD("f"),
         SERVER_UPDATE("su"),
         SNAKE("s"),
         SNAKE_MOVE("sm");
 
+        private static final long serialVersionUID = 1L;
         private final String name;
 
         PacketName(String name) {
