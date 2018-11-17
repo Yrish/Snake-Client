@@ -4,10 +4,10 @@ import me.braysen.goodwin.game.managers.Manager;
 
 import java.awt.*;
 
-public class SelectionState extends GameState {
-    public static final String ID = "SELECTION";
+public class PlayState extends GameState {
+    public static final String ID = "PLAY";
 
-    public SelectionState() {
+    public PlayState() {
         super(ID);
     }
 
@@ -16,7 +16,6 @@ public class SelectionState extends GameState {
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.drawRect(200,200,100,100);
+
     }
 }

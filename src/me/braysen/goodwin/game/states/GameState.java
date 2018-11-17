@@ -1,8 +1,10 @@
 package me.braysen.goodwin.game.states;
 
+import me.braysen.goodwin.game.managers.Manager;
+
 import java.awt.*;
 
-public class GameState {
+public abstract class GameState {
 
     protected String id;
 
@@ -10,11 +12,21 @@ public class GameState {
         this.id = id;
     }
 
-    public void render(Graphics g) {
-
+    public String getId() {
+        return id;
     }
 
-    public void tick() {
-        
+    public void startRenderChain(Graphics g, Manager m) {
+        preRender(g, m);
+        render(g);
     }
+
+    public void preRender(Graphics g, Manager m) {
+        g.clearRect(0,0, m.getDisplay().getWidth(), m.getDisplay().getHeight());
+        g.setColor(Color.BLACK);
+    }
+
+    public abstract void render(Graphics g);
+
+    public abstract void tick(Manager m);
 }
