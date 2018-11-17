@@ -13,17 +13,18 @@ public class SelectionLabel implements Selectable {
     protected String text;
     protected Color selectionColor, baseColor;
 
-    public SelectionLabel(String text, Actable action, Color selectionColor, Color baseColor) {
+    public SelectionLabel(String text, Actable action, Color selectionColor, Color baseColor, Manager m) {
         isSelected = false;
         this.action = action;
         this.text = text;
         this.selectionColor = selectionColor;
         this.baseColor = baseColor;
-
+        this.width = m.getDisplay().getCanvas().getGraphics().getFontMetrics().stringWidth(text);
+        this.height = m.getDisplay().getCanvas().getGraphics().getFontMetrics().getHeight();
     }
 
-    public SelectionLabel(String text, Actable action ) {
-        this(text, action, new Color(0,0,0,1), new Color(44,250,44, 1));
+    public SelectionLabel(String text, Actable action, Manager m ) {
+        this(text, action, new Color(44,250,44), new Color(0,0,0), m);
     }
 
 

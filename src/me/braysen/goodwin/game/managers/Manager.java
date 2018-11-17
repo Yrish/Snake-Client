@@ -10,6 +10,7 @@ public class Manager {
     private Display display;
     private KeyManager key;
     private RenderManager rm;
+    private UIManager um;
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
@@ -54,4 +55,12 @@ public class Manager {
     }
 
     public RenderManager getRenderManager() { return rm;}
+
+    public UIManager getUIManager() {
+        return um;
+    }
+
+    public void setUIManager(UIManager um) {
+        this.um = um;
+    }
 }

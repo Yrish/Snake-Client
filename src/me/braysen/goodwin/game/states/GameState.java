@@ -1,6 +1,8 @@
 package me.braysen.goodwin.game.states;
 
+import me.braysen.goodwin.game.managers.EntityManager;
 import me.braysen.goodwin.game.managers.Manager;
+import me.braysen.goodwin.game.managers.UIManager;
 
 import java.awt.*;
 
@@ -30,5 +32,8 @@ public abstract class GameState {
 
     public abstract void tick(Manager m);
 
-    public abstract void init(Manager m);
+    public void init(Manager m) {
+        m.setUIManager(new UIManager());
+        m.setEntityManager(new EntityManager());
+    }
 }

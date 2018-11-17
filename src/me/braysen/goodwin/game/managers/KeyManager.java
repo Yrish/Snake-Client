@@ -43,7 +43,6 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("keu was pressed");
         int code = e.getKeyCode();
         if (code < 0 || code >= keys.length) {
             return;
