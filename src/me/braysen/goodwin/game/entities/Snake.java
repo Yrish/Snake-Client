@@ -2,6 +2,7 @@ package me.braysen.goodwin.game.entities;
 
 
 import me.braysen.goodwin.game.ai.AI;
+import me.braysen.goodwin.game.ai.CollisionGridSnapShot;
 import me.braysen.goodwin.game.managers.KeyManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.managers.RenderManager;
@@ -169,6 +170,18 @@ public class Snake extends Entity implements Serializable {
 
     public boolean isOpositeDirection(Direction dir) {
         return (dir.ordinal() - direction.ordinal()) % 2 == 0;
+    }
+
+    @Override
+    public void drawCollisionMap(CollisionGridSnapShot g) {
+        g.drawCollision(x,y,-1);
+        for (Point p: trail) {
+            g.drawCollision(x,y,-2);
+        }
+        if (trail.size() > 0) {
+            Point last = trail.get(trail.size() - 1);
+            g.drawCollision(last.x, last.y, -3);
+        }
     }
 
     @Override

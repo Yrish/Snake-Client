@@ -1,5 +1,6 @@
 package me.braysen.goodwin.game.entities;
 
+import me.braysen.goodwin.game.ai.CollisionGridSnapShot;
 import me.braysen.goodwin.game.managers.Manager;
 
 import java.awt.Graphics;
@@ -34,6 +35,8 @@ public abstract class Entity implements Serializable, Comparable {
     public void setY(int y) {
         this.y = y;
     }
+
+    public abstract void drawCollisionMap(CollisionGridSnapShot g);
 
     public int compareTo(Object other) {
         if (!(other instanceof Entity)) {

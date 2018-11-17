@@ -1,5 +1,6 @@
 package me.braysen.goodwin.game.entities;
 
+import me.braysen.goodwin.game.ai.CollisionGridSnapShot;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.managers.RenderManager;
 
@@ -36,5 +37,10 @@ public class Food extends Entity implements Serializable {
     @Override
     public boolean collides(int x, int y) {
         return this.x == x && this.y == y;
+    }
+
+    @Override
+    public void drawCollisionMap(CollisionGridSnapShot g) {
+        g.drawCollision(x,y,1);
     }
 }

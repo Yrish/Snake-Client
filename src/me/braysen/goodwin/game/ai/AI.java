@@ -8,6 +8,6 @@ public class AI {
 
 
     public void moveSnake(Snake s, Manager m) {
-
+        CollisionGridSnapShot grid = new CollisionGridSnapShot(s.getX(), s.getY(), 10, m);
     }
 }
