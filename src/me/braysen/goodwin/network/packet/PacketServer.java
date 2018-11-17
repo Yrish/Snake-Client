@@ -1,24 +1,29 @@
 package me.braysen.goodwin.network.packet;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import me.braysen.goodwin.entities.Snake;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class PacketServer extends Packet {
 
-    public PacketServer() {
+    private Snake snake;
+
+    public PacketServer(Snake snake) {
         super("server");
+        this.snake = snake;
     }
 
     @Override
-    public void writePacket(DataOutputStream dataOutputStream) throws IOException {
-        super.writePacket(dataOutputStream);
+    public void writePacket(ObjectOutputStream objectOutputStream) throws Exception {
+        super.writePacket(objectOutputStream);
 
+        PacketSnake packetSnake = new PacketSnake(snake);
+        packetSnake.writePacket(objectOutputStream);
     }
 
     @Override
-    public void readPacket(DataInputStream dataInputStream) throws IOException {
-        super.readPacket(dataInputStream);
-
+    public void readPacket(ObjectInputStream objectInputStream) throws Exception {
+        super.readPacket(objectInputStream);
     }
 }

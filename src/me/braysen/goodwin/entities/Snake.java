@@ -2,10 +2,13 @@ package me.braysen.goodwin.entities;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Snake extends Entity {
+public class Snake extends Entity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Direction direction;
     private ArrayList<Point> trail;
@@ -41,29 +44,10 @@ public class Snake extends Entity {
         this.color = color;
     }
 
-    public enum Direction {
-        NORTH((byte) 0),
-        SOUTH((byte) 1),
-        EAST((byte) 2),
-        WEST((byte) 3);
-
-        private byte dataCode;
-
-        Direction(byte dataCode) {
-            this.dataCode = dataCode;
-        }
-
-        public byte getDataCode() {
-            return dataCode;
-        }
-
-        public static Direction fromDataCode(byte dataCode) {
-            for (Direction direction : Direction.values()) {
-                if (direction.getDataCode() == dataCode) {
-                    return direction;
-                }
-            }
-            return null;
-        }
+    public enum Direction implements Serializable {
+        NORTH,
+        SOUTH,
+        EAST,
+        WEST
     }
 }
