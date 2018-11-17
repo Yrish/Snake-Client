@@ -25,4 +25,9 @@ public class SelectionState extends GameState {
         g.setColor(Color.BLUE);
         g.fillRect(200,200,100,100);
     }
+
+    @Override
+    public void init(Manager m) {
+
+    }
 }

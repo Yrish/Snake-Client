@@ -29,4 +29,6 @@ public abstract class GameState {
     public abstract void render(Graphics g, Manager m);
 
     public abstract void tick(Manager m);
+
+    public abstract void init(Manager m);
 }

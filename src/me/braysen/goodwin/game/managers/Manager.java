@@ -13,6 +13,7 @@ public class Manager {
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
+        gsm.init(this);
         em = new EntityManager();
         am = new AssetManager();
         rm = new RenderManager(this);
