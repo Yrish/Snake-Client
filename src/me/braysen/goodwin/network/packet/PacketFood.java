@@ -1,29 +1,29 @@
 package me.braysen.goodwin.network.packet;
 
-import me.braysen.goodwin.game.entities.Snake;
+import me.braysen.goodwin.game.entities.Food;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class PacketServer extends Packet {
+public class PacketFood extends Packet {
 
-    private Snake snake;
+    private Food food;
 
-    public PacketServer(Snake snake) {
-        super("server");
-        this.snake = snake;
+    public PacketFood() {
+        super(PacketName.FOOD);
     }
 
     @Override
     public void writePacket(ObjectOutputStream objectOutputStream) throws Exception {
         super.writePacket(objectOutputStream);
 
-        PacketSnake packetSnake = new PacketSnake(snake);
-        packetSnake.writePacket(objectOutputStream);
+        objectOutputStream.writeObject(food);
     }
 
     @Override
     public void readPacket(ObjectInputStream objectInputStream) throws Exception {
         super.readPacket(objectInputStream);
+
+        this.food = (Food) objectInputStream.readObject();
     }
 }

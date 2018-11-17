@@ -1,6 +1,7 @@
 package me.braysen.goodwin.network;
 
 import me.braysen.goodwin.network.packet.Packet;
+import me.braysen.goodwin.network.packet.PacketServerUpdate;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,6 +11,8 @@ import java.net.Socket;
 
 public class ServerConnection extends Thread {
 
+    private NetworkManager networkManager;
+
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
@@ -17,8 +20,9 @@ public class ServerConnection extends Thread {
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
 
-    public ServerConnection(Socket socket) {
+    public ServerConnection(NetworkManager networkManager, Socket socket) {
         super();
+        this.networkManager = networkManager;
         this.socket = socket;
     }
 
@@ -36,7 +40,9 @@ public class ServerConnection extends Thread {
 
         while (socket != null && !socket.isClosed() && socket.isConnected()) {
             try {
-
+                PacketServerUpdate packetServerUpdate =
+                        new PacketServerUpdate(networkManager.getEntityManager().getEntities());
+                packetServerUpdate.readPacket(objectInputStream);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -45,9 +51,14 @@ public class ServerConnection extends Thread {
 
     public void writePacket(Packet packet) {
         try {
+            packet.writePacket(objectOutputStream);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void readPackets() {
+
     }
 
 }

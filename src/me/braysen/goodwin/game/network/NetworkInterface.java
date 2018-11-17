@@ -5,6 +5,7 @@ import me.braysen.goodwin.game.managers.EntityManager;
 import me.braysen.goodwin.network.NetworkManager;
 import me.braysen.goodwin.network.ServerConnection;
 import me.braysen.goodwin.network.packet.PacketSnake;
+import me.braysen.goodwin.network.packet.PacketSnakeMove;
 
 public class NetworkInterface {
 
@@ -16,13 +17,19 @@ public class NetworkInterface {
         this.networkManager = networkManager;
     }
 
-    public Snake createSnake() {
-        return null;
+    public void pushNewSnake(Snake snake) {
+        this.sendFreshUpdateSnake(snake);
     }
 
-    public void updateSnake(Snake snake) {
+    public void sendFreshUpdateSnake(Snake snake) {
         ServerConnection serverConnection = networkManager.getServerConnection();
         PacketSnake packetSnake = new PacketSnake(snake);
         serverConnection.writePacket(packetSnake);
+    }
+
+    public void moveSnake(Snake snake) {
+        ServerConnection serverConnection = networkManager.getServerConnection();
+        PacketSnakeMove packetSnakeMove = new PacketSnakeMove(snake);
+        serverConnection.writePacket(packetSnakeMove);
     }
 }
