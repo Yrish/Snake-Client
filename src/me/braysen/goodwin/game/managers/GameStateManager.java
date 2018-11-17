@@ -39,6 +39,10 @@ public class GameStateManager {
         g.init(man);
     }
 
+    public void destroyState(String id) {
+        suspendedStates.remove(id);
+    }
+
     public GameState getCurrentState() {
         return currentState;
     }

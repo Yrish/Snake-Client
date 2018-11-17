@@ -4,6 +4,7 @@ package me.braysen.goodwin.game.entities;
 import me.braysen.goodwin.game.managers.KeyManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.managers.RenderManager;
+import me.braysen.goodwin.game.states.PlayState;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -115,7 +116,7 @@ public class Snake extends Entity implements Serializable {
 
         for (Point p: trail) {
             if (p.x == x && p.y ==y) {
-                System.out.println("You died");
+                ((PlayState) m.getGameStateManager().getCurrentState()).onDeath(m);
             }
         }
 

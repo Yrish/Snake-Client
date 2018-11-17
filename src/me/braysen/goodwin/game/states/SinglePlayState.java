@@ -1,6 +1,5 @@
 package me.braysen.goodwin.game.states;
 
-import me.braysen.goodwin.game.UI.Actable;
 import me.braysen.goodwin.game.UI.Selectable;
 import me.braysen.goodwin.game.UI.Selection;
 import me.braysen.goodwin.game.UI.SelectionLabel;
@@ -15,7 +14,9 @@ public class SinglePlayState extends PlayState {
     public static final String ID = "SINGLE_PLAY";
     private Snake player;
     private boolean isPaused;
+    private boolean isDead;
     private Selection pauseSelection;
+    private Selection deathSelection;
 
     public SinglePlayState() {
         super(ID);
@@ -26,23 +27,33 @@ public class SinglePlayState extends PlayState {
         player = new Snake(0,0, new UUID(40,20), new Color(100,200,100));
         m.getEntityManager().add(player);
         isPaused = false;
-        Selectable[] options = {
+        Selectable[] pauseOptions = {
                 new SelectionLabel("Resume", () -> resume(), m),
                 new SelectionLabel("Return to Menu", () -> m.getGameStateManager().setCurrentState(SelectionState.ID), m),
                 new SelectionLabel("Close", () -> System.exit(0), Color.RED, Color.BLACK, m),
         };
-        pauseSelection = new Selection(options);
+        pauseSelection = new Selection(pauseOptions);
+        Selectable[] deathOptions = {
+                new SelectionLabel("Try again", () -> {m.getGameStateManager().destroyState(ID);m.getGameStateManager().setCurrentState(ID);},m),
+                new SelectionLabel("Return to Menu", () -> {m.getGameStateManager().destroyState(ID);m.getGameStateManager().setCurrentState(SelectionState.ID);}, m),
+                new SelectionLabel("Close", () -> System.exit(0), Color.RED, Color.BLACK, m),
+        };
+        deathSelection = new Selection(deathOptions);
     }
 
     public void tick(Manager m) {
         super.tick(m);
-        if (m.getKeyManager().isPressed(KeyEvent.VK_ESCAPE)) {
+        if (m.getKeyManager().isPressed(KeyEvent.VK_ESCAPE) && !isDead) {
             pause();
         }
-        if (!isPaused) {
+        if (!isPaused && !isDead) {
             m.getEntityManager().tick(m);
-        } else {
+        }
+        if (isPaused){
             pauseSelection.tick(m);
+        }
+        if (isDead) {
+            deathSelection.tick(m);
         }
     }
 
@@ -51,18 +62,28 @@ public class SinglePlayState extends PlayState {
     }
 
     public void resume() {
-        System.out.println("resumed");
         isPaused = false;
+    }
+
+    public void onDeath(Manager m) {
+        m.getKeyManager().dropJustPressed();
+        isPaused = false;
+        isDead = true;
     }
 
     @Override
     public void render(Graphics g, Manager m) {
         super.render(g, m);
-        if (isPaused) {
+        if (isPaused || isDead) {
             g.setColor(new Color(255,255,255, 150));
             g.fillRect(0,0,m.getDisplay().getWidth(),m.getDisplay().getHeight());
             g.setColor(Color.BLACK);
-            pauseSelection.render(g,m);
+            if (isPaused) {
+                pauseSelection.render(g, m);
+            }
+            if (isDead) {
+                deathSelection.render(g,m);
+            }
         }
     }
 }

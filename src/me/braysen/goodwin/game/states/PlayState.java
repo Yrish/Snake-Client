@@ -23,6 +23,8 @@ public abstract class PlayState extends GameState {
         m.getUIManager().render(g,m);
     }
 
+    public abstract void onDeath(Manager m);
+
     @Override
     public void init(Manager m) {
         super.init(m);

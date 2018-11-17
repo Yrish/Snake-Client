@@ -37,6 +37,10 @@ public class KeyManager implements KeyListener {
         }
     }
 
+    public void dropJustPressed() {
+        justPressed = new boolean[keys.length];
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         //not needed
