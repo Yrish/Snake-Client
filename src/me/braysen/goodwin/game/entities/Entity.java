@@ -1,5 +1,8 @@
-package me.braysen.goodwin.entities;
+package me.braysen.goodwin.game.entities;
 
+import me.braysen.goodwin.game.managers.Manager;
+
+import java.awt.*;
 import java.util.UUID;
 
 public abstract class Entity implements Comparable {
@@ -38,4 +41,10 @@ public abstract class Entity implements Comparable {
     public UUID getUUID() {
         return uuid;
     }
+
+    public void render(Graphics g, Manager m) {
+
+    }
+
+    public void tick(Manager m) {}
 }

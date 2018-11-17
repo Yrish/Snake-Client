@@ -25,4 +25,8 @@ public class Environment {
         g.setColor(Color.GREEN);
         g.fillRect(0,0, m.getDisplay().getWidth(), m.getDisplay().getHeight());
     }
+
+    public void updateTileSize(Manager m) {
+        m.getRenderManager().updateTileScale(m.getDisplay().getWidth(),m.getDisplay().getHeight(),grid[0].length, grid.length);
+    }
 }

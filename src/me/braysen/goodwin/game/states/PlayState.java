@@ -14,7 +14,7 @@ public class PlayState extends GameState {
     }
 
     public void tick(Manager m) {
-
+        env.updateTileSize(m);
     }
 
     public void render(Graphics g, Manager m) {

@@ -1,6 +1,6 @@
 package me.braysen.goodwin.game.network;
 
-import me.braysen.goodwin.entities.Snake;
+import me.braysen.goodwin.game.entities.Snake;
 import me.braysen.goodwin.game.managers.EntityManager;
 import me.braysen.goodwin.network.NetworkManager;
 

@@ -1,7 +1,7 @@
 package me.braysen.goodwin.game.network;
 
-import me.braysen.goodwin.entities.Food;
-import me.braysen.goodwin.entities.Snake;
+import me.braysen.goodwin.game.entities.Food;
+import me.braysen.goodwin.game.entities.Snake;
 import me.braysen.goodwin.game.managers.EntityManager;
 
 public class NetworkEvent {

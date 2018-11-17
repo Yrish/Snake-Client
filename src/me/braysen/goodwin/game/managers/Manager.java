@@ -9,11 +9,13 @@ public class Manager {
     private AssetManager am;
     private Display display;
     private KeyManager key;
+    private RenderManager rm;
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
         em = new EntityManager();
         am = new AssetManager();
+        rm = new RenderManager(this);
         this.display = display;
         this.key = key;
     }
@@ -49,4 +51,6 @@ public class Manager {
     public KeyManager getKeyManager() {
         return key;
     }
+
+    public RenderManager getRenderManager() { return rm;}
 }
