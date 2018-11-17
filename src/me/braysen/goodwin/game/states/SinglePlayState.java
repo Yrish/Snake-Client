@@ -3,6 +3,7 @@ package me.braysen.goodwin.game.states;
 import me.braysen.goodwin.game.UI.Selectable;
 import me.braysen.goodwin.game.UI.Selection;
 import me.braysen.goodwin.game.UI.SelectionLabel;
+import me.braysen.goodwin.game.entities.Entity;
 import me.braysen.goodwin.game.entities.Snake;
 import me.braysen.goodwin.game.managers.Manager;
 
@@ -26,6 +27,10 @@ public class SinglePlayState extends PlayState {
         super.init(m);
         player = new Snake(0,0, new UUID(40,20), new Color(100,200,100));
         m.getEntityManager().add(player);
+        m.getEntityManager().registerPlayer(player);
+        Snake oponenter = new Snake(50,50, new UUID(50,20), new Color(100,200,100));
+        oponenter.setTrailLength(100);
+        m.getEntityManager().add(oponenter);
         isPaused = false;
         Selectable[] pauseOptions = {
                 new SelectionLabel("Resume", () -> resume(), m),
@@ -68,7 +73,7 @@ public class SinglePlayState extends PlayState {
         isPaused = false;
     }
 
-    public void onDeath(Manager m) {
+    public void onDeath(Entity killer, Manager m) {
         m.getKeyManager().dropJustPressed();
         isPaused = false;
         isDead = true;

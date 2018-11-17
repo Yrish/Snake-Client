@@ -3,6 +3,7 @@ package me.braysen.goodwin.game.states;
 import me.braysen.goodwin.game.UI.Selectable;
 import me.braysen.goodwin.game.UI.Selection;
 import me.braysen.goodwin.game.UI.SelectionLabel;
+import me.braysen.goodwin.game.entities.Entity;
 import me.braysen.goodwin.game.managers.Manager;
 
 import java.awt.*;
@@ -66,7 +67,7 @@ public class MultiplayerPlayState extends PlayState {
     }
 
     @Override
-    public void onDeath(Manager m) {
+    public void onDeath(Entity killer, Manager m) {
         isDead = true;
     }
 

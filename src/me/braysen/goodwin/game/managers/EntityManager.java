@@ -13,6 +13,7 @@ public class EntityManager {
     private ArrayList<Entity> removeBuffer = new ArrayList<>();
     private ArrayList<Entity> addBuffer = new ArrayList<>();
     private boolean concurrent;
+    private UUID player;
 
     public EntityManager() {
         entities = new ArrayList<>();
@@ -64,6 +65,24 @@ public class EntityManager {
         }
         removeBuffer = new ArrayList<>();
         addBuffer = new ArrayList<>();
+    }
+
+    public Entity[] getEntitiesAtPoint(int x, int y) {
+        ArrayList<Entity> ents = new ArrayList<>();
+        for (Entity e: entities) {
+            if (e.collides(x,y)) {
+                ents.add(e);
+            }
+        }
+        return ents.toArray(new Entity[ents.size()]);
+    }
+
+    public void registerPlayer(Entity e) {
+        player = e.getUUID();
+    }
+
+    public boolean isPlayer(Entity e) {
+        return player.equals(e.getUUID());
     }
 
     public void spawnRandomFood(Manager m) {

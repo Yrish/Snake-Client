@@ -32,4 +32,9 @@ public class Food extends Entity implements Serializable {
         m.getEntityManager().spawnRandomFood(m);
         m.getEntityManager().spawnRandomFood(m);
     }
+
+    @Override
+    public boolean collides(int x, int y) {
+        return this.x == x && this.y == y;
+    }
 }

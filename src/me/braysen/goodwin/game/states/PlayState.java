@@ -1,5 +1,6 @@
 package me.braysen.goodwin.game.states;
 
+import me.braysen.goodwin.game.entities.Entity;
 import me.braysen.goodwin.game.entities.Food;
 import me.braysen.goodwin.game.environment.Environment;
 import me.braysen.goodwin.game.managers.Manager;
@@ -25,7 +26,7 @@ public abstract class PlayState extends GameState {
         m.getUIManager().render(g,m);
     }
 
-    public abstract void onDeath(Manager m);
+    public abstract void onDeath(Entity killer, Manager m);
 
     @Override
     public void init(Manager m) {

@@ -1,6 +1,7 @@
 package me.braysen.goodwin.game.entities;
 
 
+import me.braysen.goodwin.game.ai.AI;
 import me.braysen.goodwin.game.managers.KeyManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.managers.RenderManager;
@@ -21,12 +22,15 @@ public class Snake extends Entity implements Serializable {
     private ArrayList<Point> trail;
     private Color color;
     private int trailLength;
+    private AI ai;
 
     public Snake(int x, int y, UUID uuid, Color color) {
         super(uuid, x, y);
         this.trail = new ArrayList<>();
         this.color = color;
         this.trailLength = 0;
+        this.direction = Direction.WEST;
+        this.ai = new AI();
     }
 
     public Direction getDirection() {
@@ -53,10 +57,14 @@ public class Snake extends Entity implements Serializable {
         this.color = color;
     }
 
+    public void setTrailLength(int trailLength) {
+        this.trailLength = trailLength;
+    }
+
     public enum Direction implements Serializable {
         NORTH,
-        SOUTH,
         EAST,
+        SOUTH,
         WEST
     }
 
@@ -73,52 +81,102 @@ public class Snake extends Entity implements Serializable {
     public void tick(Manager m) {
 
         trail.add(0, new Point(x,y));
+        int nx = -1, ny = -1;
 
-        KeyManager k = m.getKeyManager();
-        if (direction != Direction.WEST && (k.isPressed(KeyEvent.VK_A) || k.isPressed(KeyEvent.VK_LEFT))) {
-            direction = Direction.EAST;
-        } else if (direction != Direction.EAST && (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D))) {
-            direction = Direction.WEST;
-        } else if (direction != Direction.SOUTH && (k.isPressed(KeyEvent.VK_UP) || k.isPressed(KeyEvent.VK_W))) {
-            direction = Direction.NORTH;
-        } else if (direction != Direction.NORTH && (k.isPressed(KeyEvent.VK_DOWN) || k.isPressed(KeyEvent.VK_S))) {
-            direction = Direction.SOUTH;
+        if (m.getEntityManager().isPlayer(this)) {
+            KeyManager k = m.getKeyManager();
+            if (direction != Direction.WEST && (k.isPressed(KeyEvent.VK_A) || k.isPressed(KeyEvent.VK_LEFT))) {
+                direction = Direction.EAST;
+            } else if (direction != Direction.EAST && (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D))) {
+                direction = Direction.WEST;
+            } else if (direction != Direction.SOUTH && (k.isPressed(KeyEvent.VK_UP) || k.isPressed(KeyEvent.VK_W))) {
+                direction = Direction.NORTH;
+            } else if (direction != Direction.NORTH && (k.isPressed(KeyEvent.VK_DOWN) || k.isPressed(KeyEvent.VK_S))) {
+                direction = Direction.SOUTH;
+            }
+        } else {
+            ai.moveSnake(this, m);
         }
 
         if (direction == Direction.NORTH) {
+            nx = x;
             if (y - 1 < 0) {
-                y = m.getEnvironmentManager().getHeight() - 1;
+                ny = m.getEnvironmentManager().getHeight() - 1;
             } else {
-                y -= 1;
+                ny = y - 1;
             }
         } else if (direction == Direction.SOUTH) {
-            y = (y + 1) % m.getEnvironmentManager().getHeight();
+            nx = x;
+            ny = (y + 1) % m.getEnvironmentManager().getHeight();
         } else if (direction == Direction.EAST) {
+            ny = y;
             if (x - 1 < 0) {
-                x = m.getEnvironmentManager().getWidth() - 1;
+                nx = m.getEnvironmentManager().getWidth() - 1;
             } else {
-                x -= 1;
+                nx = x - 1;
             }
         } else {
-            x = (x + 1) % m.getEnvironmentManager().getWidth();
+            ny = y;
+            nx = (x + 1) % m.getEnvironmentManager().getWidth();
         }
 
-        for (Entity e: m.getEntityManager().getEntities()) {
-            if (e.x == x && e.y ==y && e instanceof Food) {
+        for (Entity e: m.getEntityManager().getEntitiesAtPoint(nx,ny)) {
+            if (e instanceof Food) {
                 trailLength++;
                 e.kill(this, m);
+            } else {
+                if (((Snake)e).isOpositeDirection(this.direction)) {
+                    if (!m.getEntityManager().isPlayer(this)) {
+                        if (!m.getEntityManager().isPlayer(e)) {
+                            e.kill(this, m);
+                        } else {
+                            e.kill(this, m);
+                            return;
+                        }
+                    }
+                    this.kill(e, m);
+                    return;
+                }
+                this.kill(e,m);
             }
         }
+
+        x = nx;
+        y = ny;
 
         if (trailLength < trail.size()) {
             trail.remove(trail.size() - 1);
         }
 
-        for (Point p: trail) {
-            if (p.x == x && p.y ==y) {
-                ((PlayState) m.getGameStateManager().getCurrentState()).onDeath(m);
+    }
+
+    @Override
+    public boolean collides(int x, int y) {
+        if (this.x == x && this.y == y) {
+            return true;
+        }
+        for (int i = 0; i < trail.size() - 1; i++) {
+            if (trail.get(i).x == x && trail.get(i).y == y) {
+                return true;
             }
         }
+        return false;
+    }
 
+    public boolean headAt(int x, int y) {
+        return x == this.x && y == this.y;
+    }
+
+    public boolean isOpositeDirection(Direction dir) {
+        return (dir.ordinal() - direction.ordinal()) % 2 == 0;
+    }
+
+    @Override
+    public void kill(Entity killer, Manager m) {
+        if (m.getEntityManager().isPlayer(this)) {
+            ((PlayState) m.getGameStateManager().getCurrentState()).onDeath(killer, m);
+            return;
+        }
+        m.getEntityManager().remove(this);
     }
 }
