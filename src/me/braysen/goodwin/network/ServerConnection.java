@@ -1,7 +1,6 @@
 package me.braysen.goodwin.network;
 
-import me.braysen.goodwin.network.packet.PacketServerUpdate;
-import me.braysen.goodwin.network.packet.PacketUpdateServer;
+import me.braysen.goodwin.network.packet.Packet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -29,17 +28,16 @@ public class ServerConnection extends Thread {
 
         while (socket != null && !socket.isClosed() && socket.isConnected()) {
             try {
-                PacketServerUpdate packetServerUpdate = new PacketServerUpdate();
-                packetServerUpdate.readPacket(dataInputStream);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void pushPacketUpdateServer(PacketUpdateServer packetUpdateServer) {
+    public void writePacket(Packet packet) {
         try {
-            packetUpdateServer.writePacket(dataOutputStream);
+            packet.writePacket(dataOutputStream);
         } catch (Exception e) {
             e.printStackTrace();
         }

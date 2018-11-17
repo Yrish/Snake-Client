@@ -3,8 +3,8 @@ package me.braysen.goodwin.game.network;
 import me.braysen.goodwin.entities.Snake;
 import me.braysen.goodwin.game.managers.EntityManager;
 import me.braysen.goodwin.network.NetworkManager;
-
-import java.util.UUID;
+import me.braysen.goodwin.network.ServerConnection;
+import me.braysen.goodwin.network.packet.PacketSnake;
 
 public class NetworkInterface {
 
@@ -20,8 +20,9 @@ public class NetworkInterface {
         return null;
     }
 
-    public void updateSnake(UUID uuid) {
-
+    public void updateSnake(Snake snake) {
+        ServerConnection serverConnection = networkManager.getServerConnection();
+        PacketSnake packetSnake = new PacketSnake(snake);
+        serverConnection.writePacket(packetSnake);
     }
-
 }

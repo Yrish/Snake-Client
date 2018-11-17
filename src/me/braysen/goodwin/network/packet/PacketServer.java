@@ -4,20 +4,21 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public abstract class Packet {
+public class PacketServer extends Packet {
 
-    private String name;
-
-    public Packet(String name) {
-        this.name = name;
+    public PacketServer() {
+        super("server");
     }
 
+    @Override
     public void writePacket(DataOutputStream dataOutputStream) throws IOException {
-        dataOutputStream.writeUTF(name);
+        super.writePacket(dataOutputStream);
+
     }
 
+    @Override
     public void readPacket(DataInputStream dataInputStream) throws IOException {
-        this.name = dataInputStream.readUTF();
-    }
+        super.readPacket(dataInputStream);
 
+    }
 }
