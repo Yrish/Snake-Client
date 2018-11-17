@@ -1,6 +1,7 @@
 package me.braysen.goodwin.game.states;
 
 import me.braysen.goodwin.game.managers.EntityManager;
+import me.braysen.goodwin.game.managers.EnvironmentManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.managers.UIManager;
 
@@ -35,5 +36,6 @@ public abstract class GameState {
     public void init(Manager m) {
         m.setUIManager(new UIManager());
         m.setEntityManager(new EntityManager());
+        m.setEnvironmentManager(new EnvironmentManager());
     }
 }

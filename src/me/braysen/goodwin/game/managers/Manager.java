@@ -11,6 +11,7 @@ public class Manager {
     private KeyManager key;
     private RenderManager rm;
     private UIManager um;
+    private EnvironmentManager env;
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
@@ -62,5 +63,13 @@ public class Manager {
 
     public void setUIManager(UIManager um) {
         this.um = um;
+    }
+
+    public EnvironmentManager getEnvironmentManager() {
+        return env;
+    }
+
+    public void setEnvironmentManager(EnvironmentManager env) {
+        this.env = env;
     }
 }

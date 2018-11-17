@@ -47,4 +47,6 @@ public abstract class Entity implements Comparable {
     }
 
     public void tick(Manager m) {}
+
+    public void kill(Entity killer, Manager m){}
 }

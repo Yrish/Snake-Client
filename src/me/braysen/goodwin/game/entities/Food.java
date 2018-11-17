@@ -18,4 +18,10 @@ public class Food extends Entity {
         RenderManager r = m.getRenderManager();
         g.fillOval(x*r.getTileWidth(),y*r.getTileHeight(),r.getTileWidth(),r.getTileHeight());
     }
+
+    @Override
+    public void kill(Entity killer, Manager m) {
+        m.getEntityManager().remove(this);
+        m.getEntityManager().spawnRandomFood(m);
+    }
 }
