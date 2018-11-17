@@ -1,23 +1,29 @@
 package me.braysen.goodwin;
 
+import me.braysen.goodwin.game.managers.Manager;
+import me.braysen.goodwin.game.states.SelectionState;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Game {
 
-    protected  Display display;
+    protected Display display;
+    private Manager manager;
 
     public Game(int width, int height) {
         display = new Display("Snake Game", width, height);
     }
 
     public void init() {
-
+        manager = new Manager(display);
+        manager.getGameStateManager().setCurrentState(SelectionState.ID);
     }
 
     public void start() {
         while (true) {
 
+            tick();
             render();
 
             try {
@@ -36,12 +42,13 @@ public class Game {
         }
         Graphics g = bs.getDrawGraphics();
 
-        g.clearRect(0,0, display.getWidth(), display.getHeight());
-
-        g.setColor(Color.BLUE);
-        g.drawRect(200,200,100,100);
+        manager.getGameStateManager().getCurrentState().startRenderChain(g, manager);
 
         bs.show();
         g.dispose();
+    }
+
+    public void tick() {
+        manager.getGameStateManager().getCurrentState().tick(manager);
     }
 }

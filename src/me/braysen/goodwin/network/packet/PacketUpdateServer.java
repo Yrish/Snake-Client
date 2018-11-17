@@ -1,8 +1,9 @@
 package me.braysen.goodwin.network.packet;
 
+
 import me.braysen.goodwin.entities.Snake;
 
-import java.awt.Point;
+import java.awt.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -4,9 +4,10 @@ public abstract class Entity implements Comparable {
     protected int x, y;
     protected String uuid;
 
-    public Entity(int x, int y) {
+    public Entity(int x, int y, String uuid) {
         this.x = x;
         this.y = y;
+        this.uuid = uuid;
     }
 
     public int getX() {
@@ -30,5 +31,9 @@ public abstract class Entity implements Comparable {
             return -1;
         }
         return this.uuid.compareTo(((Entity) other).uuid);
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }
