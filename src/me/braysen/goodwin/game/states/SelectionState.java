@@ -39,7 +39,7 @@ public class SelectionState extends GameState {
                 new SelectionLabel("Multi Player", new Actable() {
                     @Override
                     public void act() {
-                        m.getGameStateManager().setCurrentState(SinglePlayState.ID);
+                        m.getGameStateManager().setCurrentState(MultiplayerPlayState.ID);
                     }
                 }, m)};
         m.getUIManager().add(new Selection(selections));

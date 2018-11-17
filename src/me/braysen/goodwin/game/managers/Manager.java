@@ -11,12 +11,14 @@ public class Manager {
     private KeyManager key;
     private RenderManager rm;
     private UIManager um;
+    private EnvironmentManager env;
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
         gsm.init(this);
         em = new EntityManager();
         am = new AssetManager();
+        am.init();
         rm = new RenderManager(this);
         this.display = display;
         this.key = key;
@@ -62,5 +64,13 @@ public class Manager {
 
     public void setUIManager(UIManager um) {
         this.um = um;
+    }
+
+    public EnvironmentManager getEnvironmentManager() {
+        return env;
+    }
+
+    public void setEnvironmentManager(EnvironmentManager env) {
+        this.env = env;
     }
 }

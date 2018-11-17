@@ -30,10 +30,15 @@ public class KeyManager implements KeyListener {
             if (keys[i]) {
                 justPressed[i] = keys[i] ^ past[i];
             } else {
+                justPressed[i] = false;
                 justReleased[i] = keys[i] ^ past[i];
             }
             past[i] = keys[i];
         }
+    }
+
+    public void dropJustPressed() {
+        justPressed = new boolean[keys.length];
     }
 
     @Override

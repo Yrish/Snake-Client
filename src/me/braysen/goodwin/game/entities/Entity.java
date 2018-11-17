@@ -50,6 +50,7 @@ public abstract class Entity implements Serializable, Comparable {
 
     }
 
-    public void tick(Manager m) {
-    }
+    public void tick(Manager m) {}
+
+    public void kill(Entity killer, Manager m){}
 }
