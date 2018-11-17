@@ -8,8 +8,8 @@ public class Snake extends Entity {
     private Direction direction;
     private ArrayList<Point> trail;
 
-    public Snake(int x, int y) {
-        super(x, y);
+    public Snake(int x, int y, String uuid) {
+        super(x, y, uuid);
         this.trail = new ArrayList<>();
     }
 
