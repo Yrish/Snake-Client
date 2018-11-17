@@ -13,10 +13,10 @@ public class PacketServerUpdate extends Packet {
         int sizeOfSnakeUpdate = dataInputStream.readInt();
         for (int i = 0; i < sizeOfSnakeUpdate; i++) {
 
-            int sizeOfCurrentSnakeTrail
-            for () {
-
-            }
+//            int sizeOfCurrentSnakeTrail
+//            for () {
+//
+//            }
         }
     }
 }
