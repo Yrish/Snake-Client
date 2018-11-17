@@ -7,11 +7,10 @@ import me.braysen.goodwin.game.managers.Manager;
 import java.awt.*;
 import java.util.UUID;
 
-public class PlayState extends GameState {
-    public static final String ID = "PLAY";
+public abstract class PlayState extends GameState {
     private Environment env = new Environment();
 
-    public PlayState() {
+    public PlayState(String ID) {
         super(ID);
     }
 

@@ -3,6 +3,7 @@ package me.braysen.goodwin.game.managers;
 import me.braysen.goodwin.game.states.GameState;
 import me.braysen.goodwin.game.states.PlayState;
 import me.braysen.goodwin.game.states.SelectionState;
+import me.braysen.goodwin.game.states.SinglePlayState;
 
 import java.util.HashMap;
 
@@ -23,8 +24,8 @@ public class GameStateManager {
         GameState g = suspendedStates.getOrDefault(id, null);
         if (g == null) {
             switch (id) {
-                case PlayState.ID:
-                    g = new PlayState();
+                case SinglePlayState.ID:
+                    g = new SinglePlayState();
                     break;
                 case SelectionState.ID:
                     g = new SelectionState();
