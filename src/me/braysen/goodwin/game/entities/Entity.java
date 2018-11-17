@@ -2,10 +2,14 @@ package me.braysen.goodwin.game.entities;
 
 import me.braysen.goodwin.game.managers.Manager;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Entity implements Comparable {
+public abstract class Entity implements Serializable, Comparable {
+
+    private static final long serialVersionUID = 1L;
+
     protected int x, y;
     protected UUID uuid;
 
@@ -46,5 +50,6 @@ public abstract class Entity implements Comparable {
 
     }
 
-    public void tick(Manager m) {}
+    public void tick(Manager m) {
+    }
 }
