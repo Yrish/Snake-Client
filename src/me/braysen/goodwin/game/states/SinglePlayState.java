@@ -28,9 +28,12 @@ public class SinglePlayState extends PlayState {
         player = new Snake(0,0, new UUID(40,20), new Color(100,200,100));
         m.getEntityManager().add(player);
         m.getEntityManager().registerPlayer(player);
-        Snake oponenter = new Snake(50,50, new UUID(50,20), new Color(100,200,100));
-        oponenter.setTrailLength(100);
-        m.getEntityManager().add(oponenter);
+//        Snake oponenter = new Snake(0,50, new UUID(50,20), new Color(100,200,100));
+//        oponenter.setTrailLength(156);
+//        m.getEntityManager().add(oponenter);
+//        Snake oponent = new Snake(60,50, new UUID(50,20), new Color(100,200,100));
+//        oponent.setTrailLength(200);
+//        m.getEntityManager().add(oponent);
         isPaused = false;
         Selectable[] pauseOptions = {
                 new SelectionLabel("Resume", () -> resume(), m),

@@ -85,9 +85,9 @@ public class Snake extends Entity implements Serializable {
 
         if (m.getEntityManager().isPlayer(this)) {
             KeyManager k = m.getKeyManager();
-            if (direction != Direction.WEST && (k.isPressed(KeyEvent.VK_A) || k.isPressed(KeyEvent.VK_LEFT))) {
+            if (direction != Direction.WEST && (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D))) {
                 direction = Direction.EAST;
-            } else if (direction != Direction.EAST && (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D))) {
+            } else if (direction != Direction.EAST && (k.isPressed(KeyEvent.VK_LEFT) || k.isPressed(KeyEvent.VK_A))) {
                 direction = Direction.WEST;
             } else if (direction != Direction.SOUTH && (k.isPressed(KeyEvent.VK_UP) || k.isPressed(KeyEvent.VK_W))) {
                 direction = Direction.NORTH;
@@ -97,8 +97,6 @@ public class Snake extends Entity implements Serializable {
         } else {
             ai.moveSnake(this, m);
         }
-
-        trail.add(0, new Point(x,y));
 
         if (direction == Direction.NORTH) {
             nx = x;
@@ -110,7 +108,7 @@ public class Snake extends Entity implements Serializable {
         } else if (direction == Direction.SOUTH) {
             nx = x;
             ny = (y + 1) % m.getEnvironmentManager().getHeight();
-        } else if (direction == Direction.EAST) {
+        } else if (direction == Direction.WEST) {
             ny = y;
             if (x - 1 < 0) {
                 nx = m.getEnvironmentManager().getWidth() - 1;
@@ -143,6 +141,8 @@ public class Snake extends Entity implements Serializable {
             }
         }
 
+        trail.add(0, new Point(x,y));
+
         x = nx;
         y = ny;
 
@@ -157,7 +157,7 @@ public class Snake extends Entity implements Serializable {
         if (this.x == x && this.y == y) {
             return true;
         }
-        for (int i = 0; i < trail.size() - 1; i++) {
+        for (int i = 1; i < trail.size(); i++) {
             if (trail.get(i).x == x && trail.get(i).y == y) {
                 return true;
             }
@@ -187,6 +187,7 @@ public class Snake extends Entity implements Serializable {
 
     @Override
     public void kill(Entity killer, Manager m) {
+        CollisionGridSnapShot snap = new CollisionGridSnapShot(x,y,10,m);
         if (m.getEntityManager().isPlayer(this)) {
             ((PlayState) m.getGameStateManager().getCurrentState()).onDeath(killer, m);
             return;
