@@ -14,18 +14,19 @@ public class AI {
         } else if (s.getDirection() == Snake.Direction.WEST) {
             cx = -1;
         } else if (s.getDirection() == Snake.Direction.NORTH) {
-            cy = 1;
-        } else {
             cy = -1;
+        } else {
+            cy = 1;
         }
-        s.setDirection(getSugestedDirection(cx, cy, grid));
+        Snake.Direction q = s.getDirection();
+        Snake.Direction suggested = getSugestedDirection(cx, cy, grid);
+        s.setDirection(suggested);
     }
 
     public Snake.Direction getSugestedDirection(int cx, int cy, CollisionGridSnapShot sur) {
         int[] forward = sur.getLine(cx,cy);
         if (getDangerCount(forward,-3) > 0) {
             Snake.Direction d = convertDirection(cy,cx);
-            System.out.println("changed direction");
             return d;
         }
         return convertDirection(cx, cy);
