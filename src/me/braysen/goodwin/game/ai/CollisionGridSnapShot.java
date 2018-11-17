@@ -31,4 +31,25 @@ public class CollisionGridSnapShot {
         }
         grid[ry][rx] = value;
     }
+
+    public int[] getLine(int xStep, int yStep, int xStart, int yStart, int length) {
+        if (yStep == 0 && xStep == 0) {
+            return new int[1];
+        } else if (yStep != 0 && xStep == 0) {
+            length = Math.min(length, Math.abs((width - yStart)/yStep));
+        } else if (yStep == 0 && xStep != 0) {
+            length = Math.min(length, Math.abs((width - xStart) / xStep));
+        } else {
+            length = Math.min(length, Math.min(Math.abs((width - xStart) / xStep), Math.abs((width - yStart)/yStep)));
+        }
+        int[] res = new int[length];
+        for (int i = 0; i < length; i++) {
+            res[i] = grid[yStart + yStep*i][xStart + xStep*i];
+        }
+        return res;
+    }
+
+    public int[] getLine(int xStep, int yStep) {
+        return getLine(xStep, yStep, width / 2, width / 2, width / 2);
+    }
 }

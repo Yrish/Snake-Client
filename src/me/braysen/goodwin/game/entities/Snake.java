@@ -23,7 +23,7 @@ public class Snake extends Entity implements Serializable {
     private ArrayList<Point> trail;
     private Color color;
     private int trailLength;
-    private AI ai;
+    private transient AI ai;
 
     public Snake(int x, int y, UUID uuid, Color color) {
         super(uuid, x, y);
