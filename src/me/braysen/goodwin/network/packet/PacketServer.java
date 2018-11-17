@@ -1,6 +1,6 @@
 package me.braysen.goodwin.network.packet;
 
-import me.braysen.goodwin.entities.Snake;
+import me.braysen.goodwin.game.entities.Snake;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

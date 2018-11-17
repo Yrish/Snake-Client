@@ -1,9 +1,8 @@
 package me.braysen.goodwin.game.managers;
 
-import me.braysen.goodwin.entities.Entity;
-import me.braysen.goodwin.entities.Food;
-import me.braysen.goodwin.entities.Snake;
+import me.braysen.goodwin.game.entities.Entity;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class EntityManager {
@@ -15,7 +14,23 @@ public class EntityManager {
         entities = new ArrayList<>();
     }
 
+    public void tick(Manager m) {
+        for (Entity e: entities) {
+            e.tick(m);
+        }
+    }
+
+    public void render(Graphics g, Manager m) {
+        for (Entity e: entities) {
+            e.render(g, m);
+        }
+    }
+
     public ArrayList<Entity> getEntities() {
         return entities;
+    }
+
+    public void add(Entity e) {
+        entities.add(e);
     }
 }

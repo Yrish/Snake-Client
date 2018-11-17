@@ -1,7 +1,10 @@
-package me.braysen.goodwin.entities;
+package me.braysen.goodwin.game.entities;
 
-import java.awt.Color;
-import java.awt.Point;
+
+import me.braysen.goodwin.game.managers.Manager;
+import me.braysen.goodwin.game.managers.RenderManager;
+
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -49,5 +52,12 @@ public class Snake extends Entity implements Serializable {
         SOUTH,
         EAST,
         WEST
+    }
+
+    @Override
+    public void render(Graphics g, Manager m) {
+        g.setColor(Color.blue);
+        RenderManager r = m.getRenderManager();
+        g.fillRect(x*r.getTileWidth(),y*r.getTileHeight(),r.getTileWidth(),r.getTileHeight());
     }
 }

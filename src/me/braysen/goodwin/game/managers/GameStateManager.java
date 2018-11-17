@@ -9,9 +9,14 @@ import java.util.HashMap;
 public class GameStateManager {
     private HashMap<String, GameState> suspendedStates;
     private GameState currentState;
+    private Manager man;
 
     public GameStateManager() {
         suspendedStates = new HashMap<>();
+    }
+
+    public void init(Manager m) {
+        man = m;
     }
 
     public void setCurrentState(String id) {
@@ -30,6 +35,7 @@ public class GameStateManager {
             suspendedStates.put(g.getId(), g);
         }
         currentState = g;
+        g.init(man);
     }
 
     public GameState getCurrentState() {

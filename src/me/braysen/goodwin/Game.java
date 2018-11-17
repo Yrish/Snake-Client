@@ -1,5 +1,6 @@
 package me.braysen.goodwin;
 
+import me.braysen.goodwin.game.managers.KeyManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.states.SelectionState;
 
@@ -10,13 +11,17 @@ public class Game {
 
     protected Display display;
     private Manager manager;
+    private KeyManager keyManager;
 
     public Game(int width, int height) {
+        keyManager = new KeyManager();
         display = new Display("Snake Game", width, height);
+        display.getCanvas().addKeyListener(keyManager);
+        display.getFrame().addKeyListener(keyManager);
     }
 
     public void init() {
-        manager = new Manager(display);
+        manager = new Manager(display, keyManager);
         manager.getGameStateManager().setCurrentState(SelectionState.ID);
     }
 

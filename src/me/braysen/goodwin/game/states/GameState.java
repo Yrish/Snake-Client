@@ -18,7 +18,7 @@ public abstract class GameState {
 
     public void startRenderChain(Graphics g, Manager m) {
         preRender(g, m);
-        render(g);
+        render(g, m);
     }
 
     public void preRender(Graphics g, Manager m) {
@@ -26,7 +26,9 @@ public abstract class GameState {
         g.setColor(Color.BLACK);
     }
 
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g, Manager m);
 
     public abstract void tick(Manager m);
+
+    public abstract void init(Manager m);
 }
