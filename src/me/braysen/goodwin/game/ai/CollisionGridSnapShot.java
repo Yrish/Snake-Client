@@ -12,6 +12,7 @@ public class CollisionGridSnapShot {
     int width;
     int envWidth;
     int envHeight;
+    int radius;
 
     public CollisionGridSnapShot(int xOff, int yOff, int radius, Manager m) {
         Environment env = m.getEnvironmentManager().getEnvironment();
@@ -20,6 +21,7 @@ public class CollisionGridSnapShot {
         grid = new int[width][width];
         this.xOff = xOff;
         this.yOff = yOff;
+        this.radius = radius;
         envWidth = m.getEnvironmentManager().getWidth();
         envHeight = m.getEnvironmentManager().getHeight();
         for (Entity e: m.getEntityManager().getEntities()) {
@@ -28,18 +30,23 @@ public class CollisionGridSnapShot {
     }
 
     public void drawCollision(int x, int y, int value) {
-        int rx = x - (xOff - width / 2);
-        int ry = y - (yOff - width / 2);
-        if (x < xOff - width  / 2  && xOff + width >= envWidth && x < (xOff + width) % envWidth) {
-            rx = x + (envWidth - xOff - width / 2);
-        } else if (x > xOff + width / 2 && xOff - width < 0 && x > envWidth + (xOff - width)) {
-            rx = width + (x -xOff);
+        int rx = x - (xOff - radius);
+        int ry = y - (yOff - radius);
+        if (x < xOff - radius  && xOff + radius >= envWidth && x < (xOff + radius) % envWidth) {
+            rx = x + (envWidth -(xOff - radius));
+        } else if (x > xOff + radius && xOff - radius < 0 && x > envWidth + (xOff - radius)) {
+            rx = radius - (x - envWidth);
         }
-        if (y < yOff - width  / 2  && yOff + width >= envHeight && y < (yOff + width) % envHeight) {
-            ry = y + (envHeight - yOff - width / 2);
-        } else if (y > yOff + width / 2 && yOff - width < 0 && x > envHeight + (yOff - width)) {
-            ry = width + (y -yOff);
+        if (y < yOff - radius  && yOff + radius >= envHeight && y < (yOff + radius) % envHeight) {
+            ry = y + (envHeight -(yOff - radius));
+        } else if (y > yOff + radius && yOff - radius < 0 && x > envHeight + (yOff - radius)) {
+            ry = radius - (y - envHeight);
         }
+//        if (y < yOff - width  / 2  && yOff + width >= envHeight && y < (yOff + width) % envHeight) {
+//            ry = y + (envHeight - yOff - width / 2);
+//        } else if (y > yOff + width / 2 && yOff - width < 0 && x > envHeight + (yOff - width)) {
+//            ry = width + (y -yOff);
+//        }
 //        int rx = x - (xOff + width / 2 + 1);
 //        int ry = y - (yOff + width / 2 + 1);
 //        if (x < xOff - width && (xOff + width) % envWidth > x) {
@@ -56,7 +63,7 @@ public class CollisionGridSnapShot {
 //                ry = width + ry;
 //            }
 //        }
-        if (rx < 0 || ry < 0 || rx >= width - 1 || ry >= width - 1) {
+        if (rx < 0 || ry < 0 || rx >= width || ry >= width) {
             return;
         }
         grid[ry][rx] = value;

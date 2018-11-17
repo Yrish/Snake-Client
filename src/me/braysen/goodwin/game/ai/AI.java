@@ -25,10 +25,14 @@ public class AI {
 
     public Snake.Direction getSugestedDirection(int cx, int cy, CollisionGridSnapShot sur) {
         int[] forward = sur.getLine(cx,cy);
+        int[] left = sur.getLine(cx, cy);
+        Snake.Direction res;
         if (getDangerCount(forward,-3) > 0) {
             Snake.Direction d = convertDirection(cy,cx);
-            return d;
+            res = d;
+            return res;
         }
+        if (getIncentiveCount(sur.getLine()))
         return convertDirection(cx, cy);
     }
 

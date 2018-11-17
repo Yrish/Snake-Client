@@ -30,7 +30,7 @@ public class Snake extends Entity implements Serializable {
         this.trail = new ArrayList<>();
         this.color = color;
         this.trailLength = 0;
-        this.direction = Direction.WEST;
+        this.direction = Direction.NORTH;
         this.ai = new AI();
     }
 

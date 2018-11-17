@@ -29,7 +29,7 @@ public class SinglePlayState extends PlayState {
         m.getEntityManager().add(player);
         m.getEntityManager().registerPlayer(player);
         Snake oponenter = new Snake(0,50, new UUID(50,20), new Color(100,200,100));
-        oponenter.setTrailLength(156);
+        oponenter.setTrailLength(10);
         m.getEntityManager().add(oponenter);
 //        Snake oponent = new Snake(60,50, new UUID(50,20), new Color(100,200,100));
 //        oponent.setTrailLength(200);
