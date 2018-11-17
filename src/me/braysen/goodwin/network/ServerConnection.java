@@ -56,9 +56,4 @@ public class ServerConnection extends Thread {
             e.printStackTrace();
         }
     }
-
-    private void readPackets() {
-
-    }
-
 }

@@ -4,10 +4,13 @@ import me.braysen.goodwin.game.UI.Selectable;
 import me.braysen.goodwin.game.UI.Selection;
 import me.braysen.goodwin.game.UI.SelectionLabel;
 import me.braysen.goodwin.game.entities.Entity;
+import me.braysen.goodwin.game.entities.Snake;
 import me.braysen.goodwin.game.managers.Manager;
+import me.braysen.goodwin.network.NetworkManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.UUID;
 
 public class MultiplayerPlayState extends PlayState {
     public static final String ID = "MULTI_PLAY";
@@ -15,6 +18,7 @@ public class MultiplayerPlayState extends PlayState {
     private boolean isPaused;
     private Selection deathSelection;
     private Selection pauseSelection;
+    private Snake player;
 
     public MultiplayerPlayState() {
         super(ID);
@@ -31,6 +35,7 @@ public class MultiplayerPlayState extends PlayState {
         if (isDead) {
             deathSelection.tick(m);
         }
+//        m.getNetworkManager().pushNewSnake(player);
     }
 
     @Override
@@ -51,6 +56,8 @@ public class MultiplayerPlayState extends PlayState {
 
     public void init(Manager m) {
         super.init(m);
+        player = new Snake(0,0, UUID.randomUUID(), new Color((int)(Math.random() * (double)Integer.MAX_VALUE)));
+        m.getEntityManager().registerPlayer(player);
         isPaused = false;
         Selectable[] pauseOptions = {
                 new SelectionLabel("Resume", () -> resume(), m),
@@ -64,6 +71,9 @@ public class MultiplayerPlayState extends PlayState {
                 new SelectionLabel("Close", () -> System.exit(0), Color.RED, Color.BLACK, m),
         };
         deathSelection = new Selection(deathOptions);
+        NetworkManager networkManager = new NetworkManager(m.getEntityManager());
+        m.setNetworkManager(networkManager);
+        networkManager.createConnection();
     }
 
     @Override

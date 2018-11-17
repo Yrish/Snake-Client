@@ -41,7 +41,9 @@ public class PacketServerUpdate extends Packet {
         for (int i = 0; i < entitiesListSize; i++) {
             Entity entity = (Entity) objectInputStream.readObject();
             for (int j = 0; j < entitiesListSize; j++) {
-                entities.set(j, entity);
+                if (entities.get(j).getUUID().equals(entity.getUUID())) {
+                    entities.set(j, entity);
+                }
             }
         }
     }

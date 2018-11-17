@@ -4,7 +4,7 @@ import me.braysen.goodwin.game.managers.KeyManager;
 import me.braysen.goodwin.game.managers.Manager;
 import me.braysen.goodwin.game.states.SelectionState;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game {

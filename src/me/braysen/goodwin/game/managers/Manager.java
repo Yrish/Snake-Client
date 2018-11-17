@@ -1,7 +1,7 @@
 package me.braysen.goodwin.game.managers;
 
 import me.braysen.goodwin.Display;
-import me.braysen.goodwin.game.states.GameState;
+import me.braysen.goodwin.network.NetworkManager;
 
 public class Manager {
     private GameStateManager gsm;
@@ -12,6 +12,7 @@ public class Manager {
     private RenderManager rm;
     private UIManager um;
     private EnvironmentManager env;
+    private NetworkManager networkManager;
 
     public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
@@ -56,7 +57,9 @@ public class Manager {
         return key;
     }
 
-    public RenderManager getRenderManager() { return rm;}
+    public RenderManager getRenderManager() {
+        return rm;
+    }
 
     public UIManager getUIManager() {
         return um;
@@ -72,5 +75,13 @@ public class Manager {
 
     public void setEnvironmentManager(EnvironmentManager env) {
         this.env = env;
+    }
+
+    public NetworkManager getNetworkManager() {
+        return networkManager;
+    }
+
+    public void setNetworkManager(NetworkManager networkManager) {
+        this.networkManager = networkManager;
     }
 }
