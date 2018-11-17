@@ -3,6 +3,8 @@ package me.braysen.goodwin.game.environment;
 import me.braysen.goodwin.game.managers.Manager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Environment {
 
@@ -16,7 +18,7 @@ public class Environment {
         grid = new int[height][width];
         for (int y = 0; y < grid.length; y++) {
             for (int x = 0; x < grid[y].length; x++) {
-                grid[y][x] = 1;
+                grid[y][x] = 0;
             }
         }
     }
@@ -26,8 +28,12 @@ public class Environment {
     }
 
     public void render(Graphics g, Manager m) {
-        g.setColor(Color.GREEN);
-        g.fillRect(0,0, m.getDisplay().getWidth(), m.getDisplay().getHeight());
+        ArrayList<BufferedImage> tiles = m.getAssetManager().getEnvironmentTextures();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                g.drawImage(tiles.get(grid[y][x]),x*m.getRenderManager().getTileWidth(),y*m.getRenderManager().getTileHeight(), m.getRenderManager().getTileWidth(), m.getRenderManager().getTileHeight(), null,  null);
+            }
+        }
     }
 
     public void updateTileSize(Manager m) {

@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public class Food extends Entity {
 
+
+
     public Food(int x, int y, UUID uuid) {
         super(uuid, x, y);
     }
@@ -17,11 +19,14 @@ public class Food extends Entity {
         g.setColor(Color.red);
         RenderManager r = m.getRenderManager();
         g.fillOval(x*r.getTileWidth(),y*r.getTileHeight(),r.getTileWidth(),r.getTileHeight());
+        g.drawImage(m.getAssetManager().getFoodTextures().get(0), x*m.getRenderManager().getTileWidth(), y*m.getRenderManager().getTileWidth(), m.getRenderManager().getTileWidth(), m.getRenderManager().getTileHeight(), null, null);
     }
 
     @Override
     public void kill(Entity killer, Manager m) {
         m.getEntityManager().remove(this);
+        m.getEntityManager().spawnRandomFood(m);
+        m.getEntityManager().spawnRandomFood(m);
         m.getEntityManager().spawnRandomFood(m);
     }
 }

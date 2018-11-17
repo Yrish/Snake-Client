@@ -39,6 +39,9 @@ public class SinglePlayState extends PlayState {
                 new SelectionLabel("Close", () -> System.exit(0), Color.RED, Color.BLACK, m),
         };
         deathSelection = new Selection(deathOptions);
+        for (int i = 0; i < 50; i++) {
+            m.getEntityManager().spawnRandomFood(m);
+        }
     }
 
     public void tick(Manager m) {

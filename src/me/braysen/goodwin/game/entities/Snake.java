@@ -75,13 +75,13 @@ public class Snake extends Entity implements Serializable {
         trail.add(0, new Point(x,y));
 
         KeyManager k = m.getKeyManager();
-        if (k.isPressed(KeyEvent.VK_A) || k.isPressed(KeyEvent.VK_LEFT)) {
+        if (direction != Direction.WEST && (k.isPressed(KeyEvent.VK_A) || k.isPressed(KeyEvent.VK_LEFT))) {
             direction = Direction.EAST;
-        } else if (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D)) {
+        } else if (direction != Direction.EAST && (k.isPressed(KeyEvent.VK_RIGHT) || k.isPressed(KeyEvent.VK_D))) {
             direction = Direction.WEST;
-        } else if (k.isPressed(KeyEvent.VK_UP) || k.isPressed(KeyEvent.VK_W)) {
+        } else if (direction != Direction.SOUTH && (k.isPressed(KeyEvent.VK_UP) || k.isPressed(KeyEvent.VK_W))) {
             direction = Direction.NORTH;
-        } else if (k.isPressed(KeyEvent.VK_DOWN) || k.isPressed(KeyEvent.VK_S)) {
+        } else if (direction != Direction.NORTH && (k.isPressed(KeyEvent.VK_DOWN) || k.isPressed(KeyEvent.VK_S))) {
             direction = Direction.SOUTH;
         }
 

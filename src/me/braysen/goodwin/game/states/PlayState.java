@@ -18,6 +18,8 @@ public abstract class PlayState extends GameState {
     }
 
     public void render(Graphics g, Manager m) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,m.getDisplay().getWidth(),m.getDisplay().getHeight());
         m.getEnvironmentManager().getEnvironment().render(g, m);
         m.getEntityManager().render(g,m);
         m.getUIManager().render(g,m);

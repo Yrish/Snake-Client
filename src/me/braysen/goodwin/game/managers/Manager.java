@@ -18,6 +18,7 @@ public class Manager {
         gsm.init(this);
         em = new EntityManager();
         am = new AssetManager();
+        am.init();
         rm = new RenderManager(this);
         this.display = display;
         this.key = key;
