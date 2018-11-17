@@ -26,6 +26,6 @@ public class PlayState extends GameState {
 
     @Override
     public void init(Manager m) {
-//        m.getEntityManager().add(new Food(40,40, new UUID(50,20)));
+        m.getEntityManager().add(new Food(40,40, new UUID(50,20)));
     }
 }
