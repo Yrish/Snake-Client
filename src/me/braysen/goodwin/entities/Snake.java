@@ -2,14 +2,15 @@ package me.braysen.goodwin.entities;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Snake extends Entity {
 
     private Direction direction;
     private ArrayList<Point> trail;
 
-    public Snake(int x, int y, String uuid) {
-        super(x, y, uuid);
+    public Snake(int x, int y, UUID uuid) {
+        super(uuid, x, y);
         this.trail = new ArrayList<>();
     }
 

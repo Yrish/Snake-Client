@@ -1,10 +1,12 @@
 package me.braysen.goodwin.entities;
 
+import java.util.UUID;
+
 public abstract class Entity implements Comparable {
     protected int x, y;
-    protected String uuid;
+    protected UUID uuid;
 
-    public Entity(int x, int y, String uuid) {
+    public Entity(UUID uuid, int x, int y) {
         this.x = x;
         this.y = y;
         this.uuid = uuid;
@@ -33,7 +35,7 @@ public abstract class Entity implements Comparable {
         return this.uuid.compareTo(((Entity) other).uuid);
     }
 
-    public String getUuid() {
+    public UUID getUUID() {
         return uuid;
     }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class PacketServerUpdate extends Packet {
 
+
     public PacketServerUpdate() {
         super("down");
     }
@@ -13,10 +14,11 @@ public class PacketServerUpdate extends Packet {
         int sizeOfSnakeUpdate = dataInputStream.readInt();
         for (int i = 0; i < sizeOfSnakeUpdate; i++) {
 
-//            int sizeOfCurrentSnakeTrail
-//            for () {
-//
-//            }
+            int sizeOfCurrentSnakeTrail = dataInputStream.readInt();
+
+            for (int j = 0; j < sizeOfCurrentSnakeTrail; j++) {
+
+            }
         }
     }
 }
