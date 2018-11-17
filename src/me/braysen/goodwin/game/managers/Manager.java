@@ -8,12 +8,14 @@ public class Manager {
     private EntityManager em;
     private AssetManager am;
     private Display display;
+    private KeyManager key;
 
-    public Manager(Display display) {
+    public Manager(Display display, KeyManager key) {
         gsm = new GameStateManager();
         em = new EntityManager();
         am = new AssetManager();
         this.display = display;
+        this.key = key;
     }
 
     public GameStateManager getGameStateManager() {
@@ -42,5 +44,9 @@ public class Manager {
 
     public Display getDisplay() {
         return display;
+    }
+
+    public KeyManager getKeyManager() {
+        return key;
     }
 }
