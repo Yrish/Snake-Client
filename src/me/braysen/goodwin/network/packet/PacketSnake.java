@@ -8,10 +8,9 @@ import java.io.ObjectOutputStream;
 public class PacketSnake extends Packet {
 
     private Snake snake;
-//    private ArrayList<Snake> snakes;
 
     public PacketSnake(Snake snake) {
-        super("snake");
+        super(PacketName.SNAKE);
         this.snake = snake;
     }
 

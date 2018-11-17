@@ -1,22 +1,25 @@
 package me.braysen.goodwin.network;
 
+import me.braysen.goodwin.game.managers.EntityManager;
+
 import java.net.Socket;
 
 public class NetworkManager {
 
+    private EntityManager entityManager;
     private ServerConnection serverConnection;
     private String ip;
     private int port;
 
-    public NetworkManager() {
-
+    public NetworkManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public void createConnection() {
         try {
             Socket socket = new Socket(ip, port);
 
-            this.serverConnection = new ServerConnection(socket);
+            this.serverConnection = new ServerConnection(this, socket);
             this.serverConnection.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,5 +44,9 @@ public class NetworkManager {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }
