@@ -23,7 +23,7 @@ public class Snake extends Entity implements Serializable {
     private ArrayList<Point> trail;
     private Color color;
     private int trailLength;
-    private AI ai;
+    private transient AI ai;
 
     public Snake(int x, int y, UUID uuid, Color color) {
         super(uuid, x, y);
@@ -64,9 +64,9 @@ public class Snake extends Entity implements Serializable {
 
     public enum Direction implements Serializable {
         NORTH,
-        EAST,
+        WEST,
         SOUTH,
-        WEST
+        EAST
     }
 
     @Override
@@ -81,7 +81,6 @@ public class Snake extends Entity implements Serializable {
 
     public void tick(Manager m) {
 
-        trail.add(0, new Point(x,y));
         int nx = -1, ny = -1;
 
         if (m.getEntityManager().isPlayer(this)) {
@@ -98,6 +97,8 @@ public class Snake extends Entity implements Serializable {
         } else {
             ai.moveSnake(this, m);
         }
+
+        trail.add(0, new Point(x,y));
 
         if (direction == Direction.NORTH) {
             nx = x;
