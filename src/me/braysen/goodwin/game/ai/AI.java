@@ -32,7 +32,6 @@ public class AI {
             res = d;
             return res;
         }
-        if (getIncentiveCount(sur.getLine()))
         return convertDirection(cx, cy);
     }
 
